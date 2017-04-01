@@ -52,7 +52,7 @@ public class AudioWaveView extends View {
 
     private int mWidthSpecSize;
     private int mHeightSpecSize;
-    private int mScale = 1;
+    private int mScale = 200;
     private int mBaseLine;
 
     private int mOffset = -11;//波形之间线与线的间隔
@@ -129,7 +129,7 @@ public class AudioWaveView extends View {
         }
 
         if (mOffset == dip2px(context, -11)) {
-            mOffset = dip2px(context, 1);
+            mOffset = dip2px(context, 2);
         }
 
         if (mWaveCount < 1) {
@@ -141,6 +141,7 @@ public class AudioWaveView extends View {
         mPaint = new Paint();
         mViewPaint = new Paint();
         mPaint.setColor(mWaveColor);
+        mPaint.setStrokeWidth(4);
 
     }
 
