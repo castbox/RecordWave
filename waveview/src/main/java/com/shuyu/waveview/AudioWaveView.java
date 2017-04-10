@@ -79,6 +79,8 @@ public class AudioWaveView extends View {
 
     private int mColor3 = Color.argb(0xfa, 0x42, 0xff, 0xff);
 
+    private int mMinLineHeight = 5;
+
 
     Handler handler = new Handler() {
         @Override
@@ -141,7 +143,7 @@ public class AudioWaveView extends View {
         mPaint = new Paint();
         mViewPaint = new Paint();
         mPaint.setColor(mWaveColor);
-        mPaint.setStrokeWidth(4);
+        mPaint.setStrokeWidth(3);
 
     }
 
@@ -191,7 +193,7 @@ public class AudioWaveView extends View {
                 if (mBackgroundBitmap == null) {
                     continue;
                 }
-                resolveToWaveData(dataList);
+//                resolveToWaveData(dataList);
                 if (dataList.size() > 0) {
                     updateColor();
                 }
@@ -202,14 +204,15 @@ public class AudioWaveView extends View {
                     int drawBufsize = dataList.size();
                     /*判断大小，是否改变显示的比例*/
                     for (int i = 0, j = 0; i < drawBufsize; i++, j += mOffset) {
+                        if (i == dataList.size())   continue;
                         Short sh = dataList.get(i);
                         if (sh != null) {
-                            short max = (short) (mBaseLine - sh / mScale);
+                            short max = ((sh / mScale) > mMinLineHeight) ? (short) (mBaseLine - sh / mScale) : (short) (mBaseLine - mMinLineHeight);
                             short min;
                             if (mWaveCount == 2) {
-                                min = (short) (sh / mScale + mBaseLine);
+                                min = ((sh / mScale) > mMinLineHeight) ? (short) (mBaseLine + sh / mScale) : (short) (mBaseLine + mMinLineHeight);
                             } else {
-                                min = (short) (mBaseLine);
+                                min = (short) (mBaseLine + mMinLineHeight);
                             }
                             mBackCanVans.drawLine(j, mBaseLine, j, max, mPaint);
                             mBackCanVans.drawLine(j, min, j, mBaseLine, mPaint);
