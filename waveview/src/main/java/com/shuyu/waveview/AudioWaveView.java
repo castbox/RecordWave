@@ -204,8 +204,11 @@ public class AudioWaveView extends View {
                     int drawBufsize = dataList.size();
                     /*判断大小，是否改变显示的比例*/
                     for (int i = 0, j = 0; i < drawBufsize; i++, j += mOffset) {
-                        if (i == dataList.size())   continue;
-                        Short sh = dataList.get(i);
+                        Short sh = 0;
+                        try {
+                            sh = dataList.get(i);
+                        } catch (Exception e) {
+                        }
                         if (sh != null) {
                             short max = ((sh / mScale) > mMinLineHeight) ? (short) (mBaseLine - sh / mScale) : (short) (mBaseLine - mMinLineHeight);
                             short min;
