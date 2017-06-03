@@ -4,9 +4,11 @@ import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.Handler;
+import android.text.TextUtils;
 
 import com.BaseRecorder;
 import com.czt.mp3recorder.util.LameUtil;
+import com.shuyu.waveview.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -282,16 +284,18 @@ public class MP3Recorder extends BaseRecorder {
 
 
     public static void deleteFile(String filePath) {
-        File file = new File(filePath);
-        if (file.exists()) {
-            if (file.isFile()) {
-                file.delete();
-            } else {
-                String[] filePaths = file.list();
-                for (String path : filePaths) {
-                    deleteFile(filePath + File.separator + path);
+        if (!TextUtils.isEmpty(filePath)) {
+            File file = new File(filePath);
+            if (file.exists()) {
+                if (file.isFile()) {
+                    file.delete();
+                } else {
+                    String[] filePaths = file.list();
+                    for (String path : filePaths) {
+                        deleteFile(filePath + File.separator + path);
+                    }
+                    file.delete();
                 }
-                file.delete();
             }
         }
     }

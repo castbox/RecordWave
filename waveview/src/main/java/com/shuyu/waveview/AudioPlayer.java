@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -174,7 +175,7 @@ public class AudioPlayer implements MediaPlayer.OnBufferingUpdateListener, Media
      *
      * @return 本地播放时长
      */
-    public static long getDurationLocation(Context context, String path) {
+    public static long getDurationLocation(Context context, @NonNull String path) {
         MediaPlayer player = MediaPlayer.create(context, Uri.fromFile(new File(path)));
         if (player != null)
             return player.getDuration();

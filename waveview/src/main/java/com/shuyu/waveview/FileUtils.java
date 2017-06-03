@@ -1,6 +1,7 @@
 package com.shuyu.waveview;
 
 import android.os.Environment;
+import android.text.TextUtils;
 
 import java.io.File;
 
@@ -30,17 +31,20 @@ public class FileUtils {
     }
 
     public static void deleteFile(String filePath) {
-        File file = new File(filePath);
-        if (file.exists()) {
-            if (file.isFile()) {
-                file.delete();
-            } else {
-                String[] filePaths = file.list();
-                for (String path : filePaths) {
-                    deleteFile(filePath + File.separator + path);
+        if (!TextUtils.isEmpty(filePath)) {
+            File file = new File(filePath);
+            if (file.exists()) {
+                if (file.isFile()) {
+                    file.delete();
+                } else {
+                    String[] filePaths = file.list();
+                    for (String path : filePaths) {
+                        deleteFile(filePath + File.separator + path);
+                    }
+                    file.delete();
                 }
-                file.delete();
             }
         }
+
     }
 }
