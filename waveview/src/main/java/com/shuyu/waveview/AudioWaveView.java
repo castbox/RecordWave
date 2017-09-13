@@ -224,7 +224,9 @@ public class AudioWaveView extends View {
                     }
                     synchronized (mLock) {
                         mCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
-                        mCanvas.drawBitmap(mBackgroundBitmap, 0, 0, mPaint);
+                        if (mBackgroundBitmap != null && !mBackgroundBitmap.isRecycled()) {
+                            mCanvas.drawBitmap(mBackgroundBitmap, 0, 0, mPaint);
+                        }
                     }
 
                     Message msg = new Message();
