@@ -114,6 +114,7 @@ public class AudioWaveView extends View {
         }
         if (mBackgroundBitmap != null && !mBackgroundBitmap.isRecycled()) {
             mBackgroundBitmap.recycle();
+            mBackgroundBitmap = null;
         }
     }
 
