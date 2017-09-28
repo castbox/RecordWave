@@ -91,8 +91,6 @@ public class MP3RadioStreamPlayer extends BaseRecorder {
         Pause,
     }
 
-    ;
-
     /**
      * Current player state
      */
@@ -193,8 +191,6 @@ public class MP3RadioStreamPlayer extends BaseRecorder {
             }
         }
     }
-
-    ;
 
     Timer myTimer;
     CheckProgressTimerTask myTimerTask;
